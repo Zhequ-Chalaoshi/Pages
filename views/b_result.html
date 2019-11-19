@@ -1,0 +1,141 @@
+{{template "b_header.html" .}}
+
+
+<div class="row clearfix">
+  <div class="col-md-2 column">
+  </div>  
+  <div class="col-md-8 column" style="background-color:white;">
+
+  <!-- <input placeholder="输入ID" type="text" id="tid" onclick="getId" />
+  <button type="submit" class="btn btn-sm btn-success" onclick="getId()">查询</button>
+  <script type="text/javascript">
+    function getId(){
+      var inputId = document.getElementById("tid").value;
+      window.location.href="/bachelorsdetail/" + 
+      inputId.toString();
+    }
+  </script> -->
+
+  {{if .info}}
+    {{range $item := .info }}
+      <div class="text-center">
+      <h3>{{$item.TName}}</h3>
+      <p>评分：{{$item.AvrScore}}/10</p>
+      <p>评分人数：{{$item.ScoreNum}}</p>
+      <p>院系：{{$item.College}}</p>
+      </div>
+      <script>
+        function show() {
+          var show_part = document.querySelector('.part');
+          show_part.style.display = 'block';
+        }
+        function unshow() {
+          var show_part = document.querySelector('.part');
+          show_part.style.display = 'none';
+        }
+      </script>
+      <style>
+        .part {
+          display: none;
+          position: relative;
+        }
+      </style>
+      
+      <div class="text-center">
+        <button onClick="show()" type="submit" class="btn btn-sm btn-success">评分和评论</button>
+        <div class="part">
+          <form action="/bachelorsdetail" method="post" enctype="application/x-www-form-urlencoded; charset=UTF-8"
+            accept-charset="UTF-8">
+            <input name="id" type="hidden" id="currentId" value="{{$item.Id}}"/>
+        </br>
+            <select name="score">
+              <option disabled selected>老师评分</option>
+              <option>10</option>
+              <option>9</option>
+              <option>8</option>
+              <option>7</option>
+              <option>6</option>
+              <option>5</option>
+              <option>4</option>
+              <option>3</option>
+              <option>2</option>
+              <option>1</option>
+            </select>
+            </br> <textarea placeholder="如何评价这位老师以及这门课？" class="form-control" rows="3" name="comment"></textarea>
+            </br><button type="submit" class="btn btn-sm btn-success">提交</button> <button type="button" onClick="unshow()" class="btn btn-sm btn-primary">取消</button>
+          </form>
+        </div>
+      </div>
+    {{end}}
+
+
+
+
+    <div class="text-center">
+    <br/><h4>课程信息</h4>
+    {{if .course}}
+      <table class="table table-bordered">
+        <thead>
+          <tr><th style="text-align: center;">课程</th><th style="text-align: center;">分数</th></tr>
+        </thead> 
+        <tbody>
+          {{range $i := .course}}
+            <tr>
+              <td>{{$i.Courses}}</td>
+              <td>{{$i.Scores}}</td> 
+            </tr>
+          {{end}}
+        </tbody>
+      </table>
+    </div>
+    {{else}}
+      该教师好像没有相关课程呢:)<br/>
+    {{end}}
+
+    <div>
+    <br/><h4 style="text-align: center;">评论信息</h4>
+    {{if .detail}}
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr><th style="text-align: center; width: 15%;">评论时间</th><th style="text-align: center;">内容</th><th style="text-align: center; width: 10%;">点赞数</th><th style='text-align: center; width: 8%;'></th></tr>
+        </thead>
+        <tbody>
+          {{range $j := .detail}}
+            <tr>
+              <td style="text-align: center;">{{$j.Time}}</td>
+              <td>{{$j.Content}}</td>
+
+
+              <!-- <form action="/bachelorsdetail" method="put" enctype="application/x-www-form-urlencoded; charset=UTF-8"
+              accept-charset="UTF-8">   
+                <input name="id" type="hidden"  value="{{$j.Id}}"/>  
+                <input name="num" type="hidden"  value="{{$j.Num}}"/>  
+
+                <td>{{$j.Thumb}}</td>
+                </br><button type="submit" class="btn btn-sm btn-success">提交</button>
+            </form> -->
+
+              <td style="text-align: center;">{{$j.Thumb}}</td>
+              <td><div id="m_comment-agree"><button class="btn btn-sm btn-success" data-loading-text="已赞">赞</button></div>
+              </br>
+              <div id="m_comment-disagree"><button class="btn btn-sm btn-primary" data-loading-text="已踩">踩</button></div>
+              </td>
+            </tr>
+          {{end}}
+        </tbody>
+      </table>
+    </div>
+    {{else}}
+       该教师好像还没有相关的评论呢<br/>
+    {{end}}
+
+  {{else}}
+    <br/>找不到该教师的相关信息:)<br/>
+  {{end}}
+
+  </div>
+  <div class="col-md-2 column">
+  </div>
+</div>
+
+{{template "footer.html" .}}

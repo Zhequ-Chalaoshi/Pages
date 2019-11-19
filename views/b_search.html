@@ -1,0 +1,34 @@
+{{template "b_header.html" .}}
+
+  {{if .list}}
+    <div class="row clearfix">
+      <div class="col-md-2 column">
+      </div>  
+      <div class="col-md-8 column">
+      <table class="table table-hover table-bordered" style="background-color: white;">
+        <thead><tr><th style='text-align: center;'>姓名</th><th style='text-align: center;'>院系</th><th style='text-align: center;'>链接</th></tr></thead>
+        <tbody style='text-align: center;'>
+        {{range $item := .list}}
+          <tr>
+            <td>{{$item.TName}}</td>
+            <td>{{$item.College}}</td>
+            <td>
+                <a href="/bachelorsdetail/{{$item.Id}}">详情</a>
+            </td>
+            
+          </tr>
+        {{end}}
+      </tbody></table>
+      </div>
+      <div class="col-md-2 column">
+      </div>
+    </div>
+  {{else}}
+    <br/>
+    <div class="text-center">
+      好像找不到相关的结果呢:)
+    </div>
+    <br/>
+  {{end}}
+
+{{template "footer.html" .}}

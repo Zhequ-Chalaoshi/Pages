@@ -1,0 +1,19 @@
+{{template "b_header.html" .}}
+
+<div class="row clearfix">
+    <div class="col-md-2 column">
+    </div>  
+    <div class="col-md-8 column text-center">
+    <form action="/addt" method="post" enctype="application/x-www-form-urlencoded; charset=UTF-8"
+        accept-charset="UTF-8">
+        请描述你所要添加的教师的信息（姓名、本科生教师//研究生教师、院系、上过的课等），对本站的反馈也可以写在这里
+        <textarea placeholder="请在这里填写描述" class="form-control" rows="3" name="content"></textarea>
+        </br><button type="submit" class="btn btn-sm btn-success">提交</button>
+
+    </form>
+    </div>
+    <div class="col-md-2 column">
+    </div>
+</div>
+
+{{template "footer.html" .}}
